@@ -51,6 +51,7 @@ class LearningAgent(Agent):
             # self.epsilon=self.a**self.t
             # self.epsilon=1/(self.t**2)
             self.epsilon=math.exp(-(self.a*self.t))
+            # self.epsilon=math.cos(self.a*self.t)
         return None
 
     def build_state(self):

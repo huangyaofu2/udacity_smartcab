@@ -11836,7 +11836,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># 检查你的Python版本</span>
@@ -11852,7 +11852,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import the visualization code</span>
@@ -11903,7 +11903,7 @@ div#notebook {
 驾驶代理程序在绿灯的时候没有移动，要分两种情况：</p>
 <ul>
 <li>如果是oncoming traffic的情况下，就算是绿灯，汽车不懂是能得到整的奖励；</li>
-<li>如果在no oncoming traffic的情况下，绿灯不懂则得到了负数的奖励；</li>
+<li>如果在no oncoming traffic的情况下，绿灯不动则得到了负数的奖励；</li>
 </ul>
 
 </div>
@@ -11943,9 +11943,9 @@ agent.py：</p>
 <li>epsilon是探索因子，默认为1;</li>
 <li>alpha是学习速度，默认为0.5;  </li>
 </ul>
-<p>environemnt.py: 当代理程序执行一个动作时，调用了Environment里 act() 函数;</p>
-<p>simulator.py:  render_text()函数执行的是文字打印模拟动作；render()函数则是图形版的模拟动作的显示;</p>
-<p>planner.py: next_waypoint()函数优先考虑东西方向。</p>
+<p>environemnt.py: 当代理程序执行一个动作时，调用了Environment里<code>act()</code>  函数;</p>
+<p>simulator.py: <code>render_text()</code>函数执行的是文字打印模拟动作；<code>render()</code>函数则是图形版的模拟动作的显示;</p>
+<p>planner.py: <code>next_waypoint()</code> 函数优先考虑东西方向。</p>
 
 </div>
 </div>
@@ -13147,7 +13147,7 @@ waypoint与学习效率相关性最高；<br>
 inputs的数据与安全性的相关性最高；</p>
 <p>智能出租车的方向是影响到是否能够在合理时间到目的地，即可靠性；<br>
 而出租车感知器数据则用于判断是否安全，因为在错误的状态中做出了错误的动作，会有安全性的后果。</p>
-<p>至于deadline，这一特征可以为提高效率，但如果引入deadline，状态空间扩大了$\sum_{1}^n$ 倍；另外，如果引入deadline，当出现dealine的数量比训练时的数量还要大的时候，程序可能无法适从，也就是过拟合</p>
+<p>至于deadline，这一特征看起来体现了时效性信息，但是由于每次训练的起点和终点都是随机变动，所以用它来训练的Q表是没有泛化性，而且它的值是5倍的小车与终点的曼哈顿距离，大概会将状态空间扩大了14 倍（默认地图尺寸是6*8，共有14个取值）。deadline还有某种“急于求成”的意思，即便有意义，也会过分追求时间效率——而这一特征和安全性在某种程度上存在对立关系，也会引入一定的问题。</p>
 
 </div>
 </div>
@@ -14485,7 +14485,7 @@ $\epsilon$ 衰减函数可在图上看到线性衰减；<br>
 <li><code>'tolerance'</code> - 将此标志设定为某个较小的大于0的值（默认是0.05）来设定测试的epsilon阈值。</li>
 </ul>
 <p>此外，使用一个你选择的$\epsilon$ (探索因子)衰减函数。注意无论你用哪个函数，<strong>一定要以合理的速率衰减</strong>到<code>'tolerance'</code>。Q-Learning代理程序到此才可以开始测试。某个衰减函数的例子($t$是试验的数目)：</p>
-<p>$$ \epsilon = a^t, \textrm{for } 0 &lt; a &lt; 1 \hspace{50px}\epsilon = \frac{1}{t^2}\hspace{50px}\epsilon = e^{-at}, \textrm{for } 0 &lt; a &lt; 1 \hspace{50px} \epsilon = \cos(at), \textrm{for } 0 &lt; a &lt; 1$$</p>
+<p>$$ \alpha\epsilon = a^t, \textrm{for } 0 &lt; a &lt; 1 \hspace{50px}\epsilon = \frac{1}{t^2}\hspace{50px}\epsilon = e^{-at}, \textrm{for } 0 &lt; a &lt; 1 \hspace{50px} \epsilon = \cos(at), \textrm{for } 0 &lt; a &lt; 1$$</p>
 <p>如果你想的话，你也可以使用$\alpha$ （学习率） 的衰减函数，当然这通常比较少见。如果你这么做了，确保它满足不等式$0 \leq \alpha \leq 1$。
 如果你在实施时遇到困难，尝试把<code>'verbose'</code>标志设为<code>True</code>来调试。调试时，在这里设定的标志会返回到它们的默认设定。重要的是你要理解每个标志做什么并且解释它们怎么影响模拟！</p>
 <p>当你成功完成初始的Q-Learning模拟程序后，运行下面代码单元格来使结果可视化，请注意为了达到项目要求你需要在安全性和可靠性上获得至少都为A的评分。注意当相同的模拟运行时，log文件会被覆写，所以要留意载入的log文件！</p>
@@ -14495,7 +14495,7 @@ $\epsilon$ 衰减函数可在图上看到线性衰减；<br>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Load the &#39;sim_improved-learning&#39; file from the improved Q-Learning simulation</span>
